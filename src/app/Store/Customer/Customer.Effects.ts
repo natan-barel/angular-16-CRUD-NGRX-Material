@@ -9,12 +9,12 @@ import { Update } from "@ngrx/entity";
 
 @Injectable()
 export class CustomerEffects {
-    constructor(private actin$: Actions, private service: AssociateService) {
+    constructor(private action$: Actions, private service: AssociateService) {
 
     }
 
     _loadCUSTOMER = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(loadCUSTOMER),
             exhaustMap((action) => {
                 return this.service.GetAll().pipe(
@@ -28,7 +28,7 @@ export class CustomerEffects {
     )
 
     _getCUSTOMER = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(getCUSTOMER),
             exhaustMap((action) => {
                 return this.service.Getbycode(action.id).pipe(
@@ -42,7 +42,7 @@ export class CustomerEffects {
     )
 
     _addCUSTOMER = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(addCUSTOMER),
             switchMap((action) => {
                 return this.service.Create(action.inputdata).pipe(
@@ -56,7 +56,7 @@ export class CustomerEffects {
         )
     )
     _updateCUSTOMER = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(updateCUSTOMER),
             switchMap((action) => {
                 return this.service.Update(action.inputdata).pipe(
@@ -74,7 +74,7 @@ export class CustomerEffects {
         )
     )
     _deleteCUSTOMER = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(deleteeCUSTOMER),
             switchMap((action) => {
                 return this.service.Delete(action.code).pipe(

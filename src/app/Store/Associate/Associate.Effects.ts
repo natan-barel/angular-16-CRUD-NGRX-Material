@@ -7,12 +7,12 @@ import { showalert } from "../Common/App.Action";
 
 @Injectable()
 export class AssociateEffects {
-    constructor(private actin$: Actions, private service: AssociateService) {
+    constructor(private action$: Actions, private service: AssociateService) {
 
     }
 
     _loadassociate = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(loadassociate),
             exhaustMap((action) => {
                 return this.service.GetAll().pipe(
@@ -26,7 +26,7 @@ export class AssociateEffects {
     )
 
     _getassociate = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(getassociate),
             exhaustMap((action) => {
                 return this.service.Getbycode(action.id).pipe(
@@ -40,7 +40,7 @@ export class AssociateEffects {
     )
 
     _addassociate = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(addassociate),
             switchMap((action) => {
                 return this.service.Create(action.inputdata).pipe(
@@ -54,7 +54,7 @@ export class AssociateEffects {
         )
     )
     _updateassociate = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(updateassociate),
             switchMap((action) => {
                 return this.service.Update(action.inputdata).pipe(
@@ -68,7 +68,7 @@ export class AssociateEffects {
         )
     )
     _deleteassociate = createEffect(() =>
-        this.actin$.pipe(
+        this.action$.pipe(
             ofType(deleteeassociate),
             switchMap((action) => {
                 return this.service.Delete(action.code).pipe(
